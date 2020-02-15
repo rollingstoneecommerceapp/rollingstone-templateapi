@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rollingstone-templateapi
+  labels:
+    app: rollingstone-templateapi
+    app: rollingstone
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: rollingstone-templateapi
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rollingstone-templateapi
+  labels:
+    app: rollingstone-templateapi
+    app: rollingstone
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rollingstone-templateapi
+  template:
+    metadata:
+      labels:
+        app: rollingstone-templateapi
+        app: rollingstone
+    spec:
+      containers:
+        - name: rollingstone-templateapi
+          image: ${REPOSITORY_TAG}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
