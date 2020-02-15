@@ -1,4 +1,4 @@
-package com.rollingstone.templateapi;
+package com.rollingstone;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
